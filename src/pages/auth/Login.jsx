@@ -6,6 +6,7 @@ import { useLogin } from "../../hooks/auth";
 import { BsPaintBucket } from "react-icons/bs";
 import { useAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { emailValidate, passwordValidate } from "../../utility/form-validate";
 
 export default function Login() {
   const {
@@ -14,7 +15,7 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const { login, isLoading } = useLogin();
+  const { login, isLoading: loginLoading, error: authError } = useLogin();
 
   const handleLogin = (data) => {
     login({
@@ -53,12 +54,15 @@ export default function Login() {
             </label>
             <div className="mt-2">
               <input
-                {...register("email")}
+                {...register("email", emailValidate)}
                 type="email"
                 autoComplete="email"
                 required
                 className="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
+            </div>
+            <div className=" text-red-600">
+              {errors.email && errors.email.message}
             </div>
           </div>
 
@@ -73,25 +77,29 @@ export default function Login() {
             </div>
             <div className="mt-2">
               <input
-                {...register("password", { required: true })}
+                {...register("password", passwordValidate)}
                 type="password"
                 autoComplete="current-password"
                 className="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
+            </div>
+            <div className=" text-red-600">
+              {errors.password && errors.password.message}
             </div>
           </div>
 
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              disabled={loginLoading}
+              className="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign in
             </button>
           </div>
         </form>
 
-        <p className="mt-10 text-center text-sm text-gray-500">
+        <p className="mt-4 text-center text-sm text-gray-500">
           Not a member?{" "}
           <NavLink
             to={REGISTER}
@@ -100,6 +108,10 @@ export default function Login() {
             Sign Up!
           </NavLink>
         </p>
+
+        <div className="mt-5 text-center text-lg text-red-600">
+          {authError && <>Invalid Login Credentials Error</>}
+        </div>
       </div>
     </div>
   );

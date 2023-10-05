@@ -24,7 +24,9 @@ export default function Home() {
           columnClassName="my-masonry-grid_column"
         >
           {images?.length === 0 ? (
-            <div>No posts yet... Feeling a little lonely here.</div>
+            <div className="">
+              No posts yet... Feeling a little lonely here.
+            </div>
           ) : (
             images?.map((image) => (
               <ImageCard key={image.imageLink} image={image} />

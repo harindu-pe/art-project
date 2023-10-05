@@ -2,7 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { db, storage } from "../config/firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  getStorage,
+  deleteObject,
+} from "firebase/storage";
 import { HOME } from "../config/routes";
 
 export function useAddImage(user) {
@@ -50,12 +56,29 @@ export function useAddImage(user) {
   };
 }
 
-export function useDeleteImage(id) {
+export function useDeletePost(id) {
   const [isLoading, setLoading] = useState(false);
+
+  const storage = getStorage();
+
+  // Create a reference to the file to delete
+  const storageRef = ref(storage, `${id}`);
 
   async function deleteImage() {
     setLoading(true);
+
+    // Delete the image link in database
     await deleteDoc(doc(db, "images", id));
+
+    // Delete the file from storage
+    deleteObject(storageRef)
+      .then(() => {
+        // File deleted successfully
+      })
+      .catch((error) => {
+        // Uh-oh, an error occurred!
+      });
+
     setLoading(false);
   }
 

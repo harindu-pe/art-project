@@ -8,36 +8,46 @@ import {
 import { auth, db } from "../config/firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
+import isUsernameExists from "../utility/isUsernameExists";
 
 export function useRegister() {
   const [isLoading, setLoading] = useState(false);
+  const [userNameError, setUserNameError] = useState();
   const navigate = useNavigate();
 
   async function register({ username, email, password, redirectTo = HOME }) {
     setLoading(true);
 
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
+    const usernameExists = await isUsernameExists(username);
 
-      await setDoc(doc(db, "users", res.user.uid), {
-        id: res.user.uid,
-        username: username.toLowerCase(),
-        images: [],
-        date: Date.now(),
-      });
-      navigate(redirectTo);
-    } catch (error) {
-      console.log(error);
+    if (usernameExists) {
+      setUserNameError("Username Exists");
       setLoading(false);
-    } finally {
-      setLoading(false);
+    } else {
+      try {
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+
+        await setDoc(doc(db, "users", res.user.uid), {
+          id: res.user.uid,
+          username: username.toLowerCase(),
+          images: [],
+          date: Date.now(),
+        });
+        navigate(redirectTo);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
     }
   }
-  return { register, isLoading };
+  return { register, isLoading, userNameError };
 }
 
 export function useLogin() {
   const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState();
   const navigate = useNavigate();
 
   async function login({ email, password, redirectTo = HOME }) {
@@ -48,12 +58,13 @@ export function useLogin() {
       navigate(redirectTo);
     } catch (error) {
       console.log(error);
+      setError(error.message);
       setLoading(false);
     } finally {
       setLoading(false);
     }
   }
-  return { login, isLoading };
+  return { login, isLoading, error };
 }
 
 export function useAuth() {

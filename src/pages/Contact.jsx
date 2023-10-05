@@ -2,12 +2,12 @@ import React from "react";
 
 export default function Contact() {
   return (
-    <section className="bg-white dark:bg-gray-900 p-10">
-      <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-        <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
+    <section className="bg-white dark:bg-gray-900">
+      <div className="lg:py-4 py-8 px-10 mx-auto max-w-screen-md">
+        <h2 className="mb-2 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
           Contact Me
         </h2>
-        <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">
+        <p className="mb-4 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">
           Want to send feedback about a beta feature? Need details about our
           Business plan? Let us know.
         </p>
@@ -49,9 +49,9 @@ export default function Contact() {
           </div>
           <button
             type="submit"
-            className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+            className="w-full disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
-            Send message
+            Send Message
           </button>
         </form>
       </div>
