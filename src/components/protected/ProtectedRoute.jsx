@@ -2,13 +2,13 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { LOGIN } from "../../config/routes";
 import { useAuth } from "../../hooks/auth";
+import Loading from "../Loading";
 
 const ProtectedRoute = ({ children }) => {
   const { user, isLoading: authLoading, error } = useAuth();
-  console.log(user);
 
   if (authLoading) {
-    return <div>Loading</div>;
+    return <Loading />;
   }
 
   if (user && !authLoading) {

@@ -22,10 +22,9 @@ export function useRegister() {
       await setDoc(doc(db, "users", res.user.uid), {
         id: res.user.uid,
         username: username.toLowerCase(),
-        avatar: "",
+        images: [],
         date: Date.now(),
       });
-
       navigate(redirectTo);
     } catch (error) {
       console.log(error);
@@ -86,7 +85,6 @@ export function useLogout() {
 
   async function logout() {
     await signOut();
-    // navigate(ROOT);
     window.location.reload();
   }
 
