@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { ROOT, HOME } from "../config/routes";
+import { HOME } from "../config/routes";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -30,7 +30,7 @@ export function useRegister() {
         await setDoc(doc(db, "users", res.user.uid), {
           id: res.user.uid,
           username: username.toLowerCase(),
-          images: [],
+          bio: "",
           date: Date.now(),
         });
         navigate(redirectTo);

@@ -28,7 +28,7 @@ export default function NavBar() {
 
   return (
     // <!-- navbar goes here -->
-    <nav className="bg-gray-100">
+    <nav className="bg-gray-100 w-full fixed">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between">
           <div className="flex space-x-4">
@@ -127,18 +127,21 @@ export default function NavBar() {
         <div className="mobile-menu sm:hidden ">
           <NavLink
             to={HOME}
+            onClick={toggleNavBar}
             className="border-t-2 border-indigo-100 block py-2 px-4 text-sm hover:bg-gray-200"
           >
             Home
           </NavLink>
           <NavLink
             to={ABOUT}
+            onClick={toggleNavBar}
             className="block py-2 px-4 text-sm hover:bg-gray-200"
           >
             About
           </NavLink>
           <NavLink
             to={CONTACT}
+            onClick={toggleNavBar}
             className="block py-2 px-4 text-sm hover:bg-gray-200"
           >
             Contact
@@ -148,12 +151,14 @@ export default function NavBar() {
             <div className="flex border-t-2 border-indigo-100">
               <NavLink
                 to={LOGIN}
+                onClick={toggleNavBar}
                 className="text-center w-full bg-yellow-200 border-r-2 border-indigo-100 py-2 px-4 text-sm hover:bg-gray-200"
               >
                 Login
               </NavLink>
               <NavLink
                 to={REGISTER}
+                onClick={toggleNavBar}
                 className="text-center w-full bg-green-100  py-2 px-4 text-sm hover:bg-gray-200"
               >
                 Signup
@@ -163,6 +168,7 @@ export default function NavBar() {
             <div className="flex border-t-2 border-indigo-100">
               <NavLink
                 to={ADDPOST}
+                onClick={toggleNavBar}
                 className="text-center w-full bg-yellow-200 border-r-2 border-indigo-100 py-2 px-4 text-sm hover:bg-gray-200"
               >
                 + Post

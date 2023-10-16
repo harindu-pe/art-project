@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { useGetUserImages } from "../hooks/users";
 import ImageCard from "../components/ImageCard";
 import Masonry from "react-masonry-css";

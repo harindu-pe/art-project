@@ -23,12 +23,21 @@ export default function Profile() {
 
   return (
     <div className="p-5">
-      <h1 className=" mb-9 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-center">
-        Artwork by{" "}
-        <span className="text-red-500">
-          {user.username.charAt(0).toUpperCase() + user.username.slice(1)}
-        </span>
-      </h1>
+      <div className="mb-1">
+        <h1 className="text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl  dark:text-white text-center">
+          Artwork by{" "}
+          <span className="text-red-500 underline decoration-dotted">
+            {user.username.charAt(0).toUpperCase() + user.username.slice(1)}
+          </span>
+        </h1>
+        <p className="px-1 py-4">
+          I love depicting my imagination within my artwork and working with
+          others to create one-of-a-kind artwork. In my free time, I like to
+          take naps with my bulldog, Pickles, and binge-watch my favorite TV
+          shows. I'm currently open for commissions.
+        </p>
+      </div>
+
       {imagesLoading ? (
         <Loading />
       ) : (

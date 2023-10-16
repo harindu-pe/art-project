@@ -9,6 +9,7 @@ import Contact from "../pages/Contact";
 import ProtectedRoute from "../components/protected/ProtectedRoute";
 import Profile from "../pages/Profile";
 import AddPost from "../components/protected/AddPost";
+import Image from "../pages/Image";
 
 export const ROOT = "/";
 export const LOGIN = "/login";
@@ -18,6 +19,7 @@ export const ABOUT = "/about";
 export const CONTACT = "/contact";
 export const PROFILE = "/profile/:id";
 export const ADDPOST = "/addpost";
+export const IMAGE = "/image/:id";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +57,10 @@ export const router = createBrowserRouter([
             <Profile />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: IMAGE,
+        element: <Image />,
       },
     ],
   },
